@@ -271,7 +271,4 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       </div>
     </div>
   );
-      </div>
-    </div>
-  );
 };
