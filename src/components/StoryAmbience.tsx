@@ -191,19 +191,6 @@ export const StoryAmbience: React.FC = () => {
               </div>
             )}
           </form>
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 px-5 py-3 rounded-full bg-[#FAF7F2] border border-[#4A0E17]/20 text-xs sm:text-sm text-[#221B19] placeholder-[#4A0E17]/40 outline-none focus:border-[#4A0E17]"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 rounded-full bg-[#4A0E17] hover:bg-[#32070e] text-white text-xs sm:text-sm font-semibold tracking-wide transition-colors whitespace-nowrap shadow-md"
-                >
-                  Get 20% Off
-                </button>
-              </div>
-            )}
-          </form>
         </div>
       </div>
     </section>
