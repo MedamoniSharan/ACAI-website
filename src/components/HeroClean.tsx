@@ -56,6 +56,9 @@ export const HeroClean: React.FC<HeroCleanProps> = ({
               </li>
             ))}
           </ul>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-[#4A0E17]/70">
+            Açaí’s antioxidants include cyanidin-3-glucoside, cyanidin-3-rutinoside, orientin, and homoorientin.
+          </p>
         </div>
 
         <div className="relative mx-auto w-full max-w-md lg:max-w-none">

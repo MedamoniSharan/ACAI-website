@@ -27,7 +27,7 @@ export const WhatIsAcai: React.FC<WhatIsAcaiProps> = ({ onOrder, onOpenDIY }) =>
             Açaí berries are small, dark purple fruits harvested from the Euterpe oleracea palm tree, native to the Amazon rainforest in South America.
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#4A0E17]/80 sm:text-base">
-            AÇAI.IN uses 100% organic açaí, straight from the Amazon. No shortcuts — just pure superfood goodness, packed with antioxidants and nutrients.
+            AÇAI.IN uses 100% organic açaí, straight from the Amazon. Its antioxidants include the anthocyanins cyanidin-3-glucoside and cyanidin-3-rutinoside, and the flavonoids orientin and homoorientin.
           </p>
         </div>
         <div className="overflow-hidden rounded-3xl">
@@ -72,6 +72,9 @@ export const WhatIsAcai: React.FC<WhatIsAcaiProps> = ({ onOrder, onOpenDIY }) =>
       <section className="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-[#9B1E36]">Benefits</p>
         <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-[#1d1d1f]">Why açaí</h2>
+        <p className="mx-auto mt-3 max-w-2xl text-center text-sm leading-relaxed text-[#4A0E17]/80">
+          The antioxidants in açaí are cyanidin-3-glucoside, cyanidin-3-rutinoside, orientin, and homoorientin.
+        </p>
         <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-5">
           {BENEFITS.map((item) => (
             <div key={item.title} className="rounded-3xl bg-white px-4 py-6 text-center">
