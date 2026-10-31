@@ -43,7 +43,7 @@ export const StoryAmbience: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {[
               {
                 title: 'Cozy Reading Nooks',
@@ -52,10 +52,6 @@ export const StoryAmbience: React.FC = () => {
               {
                 title: 'Artisanal Bowl Station',
                 img: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=600&q=80',
-              },
-              {
-                title: 'Outdoor Garden Terrace',
-                img: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=600&q=80',
               },
             ].map((spot, i) => (
               <div
