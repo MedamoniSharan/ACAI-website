@@ -9,7 +9,7 @@ interface SimpleHomeProps {
 const CATEGORY_CARDS: { id: Category; title: string; image: string }[] = [
   { id: 'bowls', title: 'Açaí Bowls', image: '/menu/classical-acai-bowl.jpg' },
   { id: 'smoothies', title: 'Smoothies', image: '/menu/classic-acai-cream.jpg' },
-  { id: 'coffee', title: 'Coffee', image: '/menu/latte.jpg' },
+  { id: 'coffee', title: 'Coffee', image: '/menu/image.png' },
   { id: 'matcha-ube', title: 'Matcha & Ube', image: '/menu/strawberry-matcha-latte.jpg' },
   { id: 'tiramisu', title: 'Tiramisu', image: '/menu/acai-tiramisu.jpg' },
   { id: 'cookies', title: 'Cookies', image: '/menu/nutella-cookie.jpg' },
