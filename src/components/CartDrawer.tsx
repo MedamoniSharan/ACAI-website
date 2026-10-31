@@ -188,11 +188,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   key={item.cartId}
                   className="p-3.5 rounded-2xl bg-white border border-[#4A0E17]/10 flex gap-3 shadow-xs"
                 >
-                  <img
-                    src={item.product.image}
-                    alt={item.product.name}
-                    className="w-16 h-16 rounded-xl object-cover"
-                  />
+                  {item.product.image ? (
+                    <img
+                      src={item.product.image}
+                      alt={item.product.name}
+                      className="w-16 h-16 rounded-xl object-cover"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-xl bg-[#FAF7F2] border border-[#4A0E17]/10 shrink-0" />
+                  )}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between">

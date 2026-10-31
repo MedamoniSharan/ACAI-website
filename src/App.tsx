@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroClean } from './components/HeroClean';
-import { ParallaxShowcase } from './components/ParallaxShowcase';
+import { WhatIsAcai } from './components/WhatIsAcai';
+import { SimpleHome } from './components/SimpleHome';
 import { MenuSection } from './components/MenuSection';
 import { DIYBowlBuilder } from './components/DIYBowlBuilder';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { StoryAmbience } from './components/StoryAmbience';
-import { ReviewsSection } from './components/ReviewsSection';
 import { LocationFooter } from './components/LocationFooter';
 import { Category, Product, CartItem } from './types';
 import { ShoppingBag } from 'lucide-react';
@@ -18,31 +18,11 @@ export const App: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [isDIYOpen, setIsDIYOpen] = useState<boolean>(false);
+  const [view, setView] = useState<'home' | 'acai'>('home');
+  const [pendingScroll, setPendingScroll] = useState<string | null>(null);
 
   // Cart state
-  const [cart, setCart] = useState<CartItem[]>([
-    // Initial sample item for delightful first impression
-    {
-      cartId: 'init-1',
-      product: {
-        id: 'classic-acai-cream',
-        name: 'Classic Açaí Cream',
-        category: 'smoothies',
-        categoryLabel: 'Açaí & Smoothies',
-        price: 329,
-        description: 'Wild-harvested organic Amazonian açaí blended with sweet strawberries and oat milk.',
-        ingredients: ['Pure Amazonian Açaí', 'Strawberries', 'Oat Milk', 'Banana'],
-        image: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=800&q=80',
-        calories: '280 kcal',
-        rating: 4.9,
-        reviewCount: 142,
-      },
-      quantity: 1,
-      selectedOptions: { 'Milk Base': 'Oat Milk (Barista Edition)' },
-      unitPrice: 329,
-      totalPrice: 329,
-    },
-  ]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   const handleAddToCart = (newItem: CartItem) => {
     setCart((prev) => {
@@ -99,11 +79,35 @@ export const App: React.FC = () => {
     if (category) {
       setSelectedCategory(category);
     }
-    const menuEl = document.getElementById('menu');
-    if (menuEl) {
-      menuEl.scrollIntoView({ behavior: 'smooth' });
-    }
+    setView('home');
+    setPendingScroll('menu');
   };
+
+  const openDIY = () => {
+    setIsDIYOpen(true);
+  };
+
+  const openAcaiPage = () => {
+    setView('acai');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const navigateHome = (target: 'home' | 'menu' | 'gallery' | 'contact') => {
+    if (target === 'menu') setSelectedCategory('all');
+    const id = target === 'home' ? 'hero' : target === 'menu' ? 'menu' : target === 'gallery' ? 'ambience' : 'locations';
+    setView('home');
+    setPendingScroll(id);
+  };
+
+  useEffect(() => {
+    if (view !== 'home' || !pendingScroll) return;
+    const id = pendingScroll;
+    const timer = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      setPendingScroll(null);
+    }, 60);
+    return () => window.clearTimeout(timer);
+  }, [view, pendingScroll]);
 
   const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -113,23 +117,25 @@ export const App: React.FC = () => {
       <Navbar
         cart={cart}
         onOpenCart={() => setIsCartOpen(true)}
-        onOpenDIY={() => setIsDIYOpen(true)}
-        onSelectCategory={handleScrollToMenu}
+        onOpenDIY={openDIY}
+        onOpenAcai={openAcaiPage}
+        onNavigate={navigateHome}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
 
-      {/* Clean Apple-Style Hero Showcase */}
-      <div id="hero">
-        <HeroClean
-          onExploreMenu={() => handleScrollToMenu('all')}
-          onOpenDIY={() => setIsDIYOpen(true)}
-          onAddToCart={handleAddToCart}
-        />
-      </div>
+      {view === 'acai' ? (
+        <WhatIsAcai onOrder={() => handleScrollToMenu('bowls')} onOpenDIY={openDIY} />
+      ) : (
+        <>
+      <HeroClean
+        onExploreMenu={() => handleScrollToMenu('all')}
+        onOpenDIY={openDIY}
+        onOpenAcai={openAcaiPage}
+        onAddToCart={handleAddToCart}
+      />
 
-      {/* Apple-Style Bento Parallax Showcase */}
-      <ParallaxShowcase onSelectCategory={handleScrollToMenu} />
+      <SimpleHome onSelectCategory={handleScrollToMenu} />
 
       {/* Full Menu Section with Categories & Filters */}
       <MenuSection
@@ -138,17 +144,16 @@ export const App: React.FC = () => {
         searchQuery={searchQuery}
         onOpenProductModal={(product) => setSelectedProduct(product)}
         onAddToCart={handleAddToCart}
-        onOpenDIY={() => setIsDIYOpen(true)}
+        onOpenDIY={openDIY}
       />
 
       {/* Story & Cafe Ambience (inspired by user uploaded Beanona / Aromé references) */}
       <StoryAmbience />
-
-      {/* Reviews & Social Proof */}
-      <ReviewsSection />
+        </>
+      )}
 
       {/* Locations & Footer */}
-      <LocationFooter />
+      <LocationFooter onOpenAcai={openAcaiPage} onNavigate={navigateHome} />
 
       {/* D.I.Y Bowl Interactive Builder Modal */}
       <DIYBowlBuilder

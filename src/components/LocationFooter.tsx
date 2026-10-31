@@ -1,7 +1,12 @@
 import React from 'react';
-import { MapPin, Clock, Instagram, ArrowUp } from 'lucide-react';
+import { MapPin, Instagram, ArrowUp } from 'lucide-react';
 
-export const LocationFooter: React.FC = () => {
+interface LocationFooterProps {
+  onOpenAcai: () => void;
+  onNavigate: (target: 'home' | 'menu' | 'gallery' | 'contact') => void;
+}
+
+export const LocationFooter: React.FC<LocationFooterProps> = ({ onOpenAcai, onNavigate }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -14,52 +19,36 @@ export const LocationFooter: React.FC = () => {
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 space-y-10 sm:space-y-16 relative z-10">
         {/* Top Locations Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 pb-8 sm:pb-12 border-b border-white/10">
-          {/* Flagship Cafe */}
           <div className="p-5 sm:p-6 rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 space-y-2.5 sm:space-y-3">
             <div className="flex items-center gap-2 text-[#E17285] text-xs font-semibold uppercase tracking-wider">
               <MapPin className="w-4 h-4" />
-              <span>Flagship Sanctuary</span>
+              <span>Hyderabad</span>
             </div>
-            <h4 className="text-xl font-bold tracking-tight">Indiranagar 100ft Road</h4>
+            <h4 className="text-xl font-bold tracking-tight">Kokapet</h4>
             <p className="text-xs text-white/70 leading-relaxed">
-              #42, 100 Feet Road, HAL 2nd Stage, Indiranagar, Bengaluru, KA 560038
+              Offline bowls, built the way you like them.
             </p>
-            <div className="flex items-center gap-2 text-xs text-white/60 pt-2 border-t border-white/5">
-              <Clock className="w-3.5 h-3.5 text-[#E17285]" />
-              <span>8:00 AM – 11:30 PM (Daily)</span>
-            </div>
           </div>
 
-          {/* Location 2 */}
           <div className="p-6 rounded-3xl bg-white/5 border border-white/10 space-y-3">
             <div className="flex items-center gap-2 text-[#E17285] text-xs font-semibold uppercase tracking-wider">
               <MapPin className="w-4 h-4" />
-              <span>Artisan Roastery & Bar</span>
+              <span>Mumbai</span>
             </div>
-            <h4 className="text-xl font-bold tracking-tight">Koramangala 4th Block</h4>
+            <h4 className="text-xl font-bold tracking-tight">Worli</h4>
             <p className="text-xs text-white/70 leading-relaxed">
-              80 Feet Rd, 4th Block, Koramangala, Bengaluru, KA 560034
+              Offline bowls, built the way you like them.
             </p>
-            <div className="flex items-center gap-2 text-xs text-white/60 pt-2 border-t border-white/5">
-              <Clock className="w-3.5 h-3.5 text-[#E17285]" />
-              <span>8:00 AM – 12:00 Midnight (Daily)</span>
-            </div>
           </div>
 
-          {/* Location 3 */}
           <div className="p-6 rounded-3xl bg-white/5 border border-white/10 space-y-3">
             <div className="flex items-center gap-2 text-[#E17285] text-xs font-semibold uppercase tracking-wider">
-              <MapPin className="w-4 h-4" />
-              <span>Terrace Garden Cafe</span>
+              <span>Order in</span>
             </div>
-            <h4 className="text-xl font-bold tracking-tight">Bandra West, Mumbai</h4>
+            <h4 className="text-xl font-bold tracking-tight">Swiggy & Zomato</h4>
             <p className="text-xs text-white/70 leading-relaxed">
-              Pali Hill Road, Bandra West, Mumbai, MH 400050
+              The same custom bowls, delivered.
             </p>
-            <div className="flex items-center gap-2 text-xs text-white/60 pt-2 border-t border-white/5">
-              <Clock className="w-3.5 h-3.5 text-[#E17285]" />
-              <span>7:30 AM – 11:00 PM (Daily)</span>
-            </div>
           </div>
         </div>
 
@@ -86,7 +75,7 @@ export const LocationFooter: React.FC = () => {
             </div>
 
             <p className="text-xs text-white/70 max-w-sm leading-relaxed">
-              Rooted in the pristine Amazonian rainforest. Roasted with Scandinavian Nordic discipline. Whisked with Japanese Kyoto ceremony.
+              100% pure açaí purée. Zero refined sugar. No artificial sweeteners. Predominantly vegan, sugar-free, and gluten-free.
             </p>
 
             <div className="flex items-center gap-3 pt-2">
@@ -109,29 +98,29 @@ export const LocationFooter: React.FC = () => {
             </h5>
             <ul className="space-y-2 text-xs text-white/75">
               <li>
-                <a href="#hero" className="hover:text-white transition-colors">
-                  3D Product Experience
-                </a>
+                <button onClick={() => onNavigate('home')} className="hover:text-white transition-colors">
+                  Home
+                </button>
               </li>
               <li>
-                <a href="#menu" className="hover:text-white transition-colors">
-                  Full Beverage & Food Menu
-                </a>
+                <button onClick={() => onNavigate('menu')} className="hover:text-white transition-colors">
+                  Menu
+                </button>
               </li>
               <li>
-                <a href="#story" className="hover:text-white transition-colors">
-                  Amazonian Sourcing Story
-                </a>
+                <button onClick={onOpenAcai} className="hover:text-white transition-colors">
+                  What is Açaí
+                </button>
               </li>
               <li>
-                <a href="#ambience" className="hover:text-white transition-colors">
-                  Cafe Ambience Gallery
-                </a>
+                <button onClick={() => onNavigate('gallery')} className="hover:text-white transition-colors">
+                  Gallery
+                </button>
               </li>
               <li>
-                <a href="#locations" className="hover:text-white transition-colors">
-                  Find Nearest Cafe
-                </a>
+                <button onClick={() => onNavigate('contact')} className="hover:text-white transition-colors">
+                  Kokapet & Worli
+                </button>
               </li>
             </ul>
           </div>
@@ -142,12 +131,8 @@ export const LocationFooter: React.FC = () => {
               Purity & Care
             </h5>
             <p className="text-xs text-white/70 leading-relaxed">
-              We cater to vegan, keto, high-protein, and gluten-sensitive diets. Plant-based oat, coconut, and almond milks available at zero extra charge for wellness creations.
+              Predominantly vegan, sugar-free, and gluten-free. Zero refined sugar and no artificial sweeteners.
             </p>
-            <div className="pt-2 text-xs text-white/60 space-y-1">
-              <div>Concierge: hello@acai.in</div>
-              <div>Direct Phone: +91 (080) 4122-ACAI</div>
-            </div>
           </div>
         </div>
 

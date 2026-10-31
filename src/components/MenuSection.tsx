@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Star, Sparkles, Flame, Eye, ArrowRight } from 'lucide-react';
+import { Plus, Star, Flame, Eye } from 'lucide-react';
 import { Product, Category, CartItem } from '../types';
 import { MENU_PRODUCTS, CATEGORIES } from '../data/menuData';
 
@@ -45,9 +45,20 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     return categoryMatch && searchMatch && tagMatch;
   });
 
+  const openProduct = (product: Product) => {
+    if (product.id === 'diy-bowl') {
+      onOpenDIY();
+      return;
+    }
+    onOpenProductModal(product);
+  };
+
   const handleQuickAdd = (e: React.MouseEvent, product: Product) => {
     e.stopPropagation();
-    // If the product has options, open modal so user can choose, otherwise add immediately
+    if (product.id === 'diy-bowl') {
+      onOpenDIY();
+      return;
+    }
     if (product.options && product.options.length > 0) {
       onOpenProductModal(product);
     } else {
@@ -66,29 +77,17 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     <section id="menu" className="py-14 sm:py-20 lg:py-28 relative bg-[#FAF7F2]">
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-5 sm:gap-6">
-          <div className="space-y-2.5 sm:space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4A0E17]/5 border border-[#4A0E17]/10 text-xs font-semibold text-[#4A0E17] uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Artisanal Kitchen & Bar</span>
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-[-0.03em] text-[#1d1d1f]">
-              Curated Menu & Beverages
-            </h2>
-            <p className="text-xs sm:text-base text-[#4A0E17]/75 font-normal max-w-xl">
-              From our wild-harvested Amazonian açaí bowls to 18-hour single origin cold brew, every recipe is hand-measured to perfection.
-            </p>
-          </div>
-
-          {/* D.I.Y Bowl Callout Button */}
-          <button
-            onClick={onOpenDIY}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#4A0E17] to-[#7E1C2E] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all"
-          >
-            <Sparkles className="w-4 h-4 text-[#D4AF37] animate-spin-slow" />
-            <span>Build Custom D.I.Y Bowl</span>
-            <ArrowRight className="w-3.5 h-3.5 ml-1" />
-          </button>
+        <div className="mb-8 text-center sm:mb-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#9B1E36]">Everyday Ritual</p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-[#1d1d1f] sm:text-4xl">
+            Menu
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-xs font-semibold uppercase tracking-[0.14em] text-[#4A0E17]/70">
+            All prices are in INR. Taxes applicable as extra.
+          </p>
+          <p className="mx-auto mt-2 max-w-xl text-xs text-[#4A0E17]/70">
+            Açaí bowls: extra toppings ₹39 or ₹49. Bowls are Regular / Large. Smoothies are 12oz / 16oz.
+          </p>
         </div>
 
         {/* Category Navigation Pills (Apple Tab Style) */}
@@ -120,33 +119,6 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
           })}
         </div>
 
-        {/* Tag Filters (Apple Chips) */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-6 mb-8 text-xs font-medium text-[#4A0E17]/70 no-scrollbar">
-          <span className="text-[11px] uppercase tracking-wider font-semibold text-[#4A0E17]/50 mr-1">
-            Filter:
-          </span>
-          {[
-            { id: 'all', label: 'All Items' },
-            { id: 'bestseller', label: '★ Bestsellers' },
-            { id: 'signature', label: 'Signature' },
-            { id: 'high protein', label: '⚡ High Protein' },
-            { id: 'organic', label: '🌱 Organic' },
-            { id: 'vegan', label: '🍃 Vegan' },
-          ].map((tag) => (
-            <button
-              key={tag.id}
-              onClick={() => setActiveTag(tag.id)}
-              className={`px-3 py-1.5 rounded-full border transition-all whitespace-nowrap ${
-                activeTag === tag.id
-                  ? 'border-[#9B1E36] bg-[#9B1E36]/10 text-[#9B1E36] font-semibold'
-                  : 'border-[#4A0E17]/15 bg-transparent hover:border-[#4A0E17]/30 text-[#4A0E17]/75'
-              }`}
-            >
-              {tag.label}
-            </button>
-          ))}
-        </div>
-
         {/* Product Cards Grid */}
         {filteredProducts.length === 0 ? (
           <div className="text-center py-16 bg-white/50 rounded-3xl border border-dashed border-[#4A0E17]/20 p-8">
@@ -171,20 +143,24 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => onOpenProductModal(product)}
+                onClick={() => openProduct(product)}
                 className="group relative bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-[#4A0E17]/10 p-3.5 sm:p-5 flex flex-col justify-between hover:shadow-[0_20px_40px_-15px_rgba(74,14,23,0.12)] hover:-translate-y-1 sm:hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
               >
                 {/* Image Wrap */}
                 <div className="relative w-full h-44 sm:h-52 rounded-xl sm:rounded-2xl overflow-hidden bg-[#FAF7F2] mb-3.5 sm:mb-4">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-105"
-                    loading="lazy"
-                  />
+                  {product.image ? (
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-105"
+                      style={product.imagePosition ? { objectPosition: product.imagePosition } : undefined}
+                      loading="lazy"
+                    />
+                  ) : null}
 
-                  {/* Subtle bottom shadow only */}
-                  <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/35 to-transparent pointer-events-none" />
+                  {product.image ? (
+                    <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-black/35 to-transparent pointer-events-none" />
+                  ) : null}
 
                   {/* Badge */}
                   {product.badge && (
@@ -214,10 +190,12 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                       <span className="uppercase tracking-wider font-semibold text-[#9B1E36]">
                         {product.categoryLabel}
                       </span>
-                      <span className="flex items-center gap-0.5 font-medium text-[#D4AF37]">
-                        <Star className="w-3 h-3 fill-current" />
-                        {product.rating}
-                      </span>
+                      {product.reviewCount > 0 && (
+                        <span className="flex items-center gap-0.5 font-medium text-[#D4AF37]">
+                          <Star className="w-3 h-3 fill-current" />
+                          {product.rating}
+                        </span>
+                      )}
                     </div>
 
                     <h3 className="text-base sm:text-lg font-bold tracking-tight text-[#1d1d1f] group-hover:text-[#9B1E36] transition-colors line-clamp-1">
@@ -233,13 +211,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                   <div className="pt-3 sm:pt-4 border-t border-[#4A0E17]/5 flex items-center justify-between">
                     <div>
                       <span className="text-base sm:text-xl font-bold tracking-tight text-[#4A0E17]">
-                        ₹{product.price}
+                        {product.priceDisplay || `₹${product.price}`}
                       </span>
-                      {product.priceDisplay && (
-                        <span className="text-[10px] text-[#4A0E17]/60 ml-1.5 block">
-                          {product.priceDisplay}
-                        </span>
-                      )}
                     </div>
 
                     <button

@@ -1,13 +1,11 @@
-export type Category = 
+export type Category =
   | 'all'
-  | 'smoothies' 
-  | 'coffee-hot' 
-  | 'coffee-cold' 
-  | 'cold-brew' 
-  | 'matcha' 
-  | 'ube' 
-  | 'cookies' 
-  | 'tiramisu';
+  | 'bowls'
+  | 'smoothies'
+  | 'coffee'
+  | 'matcha-ube'
+  | 'tiramisu'
+  | 'cookies';
 
 export interface ProductOption {
   name: string;
@@ -27,6 +25,7 @@ export interface Product {
   description: string;
   ingredients: string[];
   image: string;
+  imagePosition?: string;
   secondaryImage?: string;
   calories?: string;
   prepTime?: string;

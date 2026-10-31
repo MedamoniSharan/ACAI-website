@@ -130,7 +130,7 @@ export const DIYBowlBuilder: React.FC<DIYBowlBuilderProps> = ({
         ...selectedCrunches.map((c) => CRUNCHES.find((x) => x.id === c)?.name || c),
         selectedDrizzle.name,
       ],
-      image: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=800&q=80',
+      image: '/menu/diy-bowl.jpg',
       calories: `${totalCalories} kcal`,
       prepTime: '5 mins',
       rating: 5.0,
