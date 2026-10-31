@@ -230,7 +230,7 @@ export const MENU_PRODUCTS: Product[] = [
     priceDisplay: '₹129 / ₹169',
     description: 'Single or double espresso.',
     ingredients: ['Espresso'],
-    image: '/menu/image.png',
+    image: '/menu/espresso.jpg',
     options: [sizeOption('Single', 'Double', 40)],
   }),
   item({
@@ -241,7 +241,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 169,
     description: 'Americano or long black.',
     ingredients: ['Espresso', 'Hot water'],
-    image: '/menu/image.png',
+    image: '/menu/americano.jpg',
   }),
   item({
     id: 'cappuccino',
@@ -251,7 +251,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 229,
     description: 'Espresso with steamed milk and foam.',
     ingredients: ['Espresso', 'Steamed milk', 'Foam'],
-    image: '/menu/image.png',
+    image: '/menu/cappuccino.jpg',
   }),
   item({
     id: 'latte',
@@ -262,7 +262,7 @@ export const MENU_PRODUCTS: Product[] = [
     priceDisplay: '₹229 / ₹249',
     description: 'Espresso with steamed milk.',
     ingredients: ['Espresso', 'Steamed milk'],
-    image: '/menu/image.png',
+    image: '/menu/latte.jpg',
     options: [sizeOption('Regular', 'Large', 20)],
   }),
   item({
@@ -273,7 +273,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 229,
     description: 'Espresso with micro-textured milk.',
     ingredients: ['Espresso', 'Micro-textured milk'],
-    image: '/menu/image.png',
+    image: '/menu/flat-white.jpg',
   }),
   item({
     id: 'macchiato',
@@ -283,7 +283,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 249,
     description: 'Espresso marked with foam.',
     ingredients: ['Espresso', 'Foam'],
-    image: '/menu/image.png',
+    image: '/menu/macchiato.jpg',
   }),
   item({
     id: 'freddo-espresso',
@@ -293,7 +293,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 139,
     description: 'Shaken espresso over ice.',
     ingredients: ['Espresso', 'Ice'],
-    image: '/menu/image.png',
+    image: '/menu/freddo-espresso.jpg',
   }),
   item({
     id: 'freddo-americano',
@@ -303,7 +303,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 219,
     description: 'Cold americano.',
     ingredients: ['Espresso', 'Cold water', 'Ice'],
-    image: '/menu/image.png',
+    image: '/menu/freddo-americano.jpg',
   }),
   item({
     id: 'freddo-cappuccino',
@@ -313,7 +313,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 219,
     description: 'Cold cappuccino.',
     ingredients: ['Espresso', 'Cold milk foam', 'Ice'],
-    image: '/menu/image.png',
+    image: '/menu/freddo-cappuccino.jpg',
   }),
   item({
     id: 'iced-latte',
@@ -323,7 +323,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 239,
     description: 'Espresso over ice and milk.',
     ingredients: ['Espresso', 'Milk', 'Ice'],
-    image: '/menu/image.png',
+    image: '/menu/iced-latte.jpg',
   }),
   item({
     id: 'iced-mocha',
@@ -333,7 +333,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 239,
     description: 'Espresso, chocolate, milk, and ice.',
     ingredients: ['Espresso', 'Chocolate', 'Milk', 'Ice'],
-    image: '/menu/image.png',
+    image: '/menu/iced-mocha.jpg',
   }),
   item({
     id: 'cranberry-cold-brew',
@@ -343,7 +343,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 229,
     description: 'Cold brew with cranberry.',
     ingredients: ['Cold brew', 'Cranberry'],
-    image: '/menu/image.png',
+    image: '/menu/cranberry-cold-brew.jpg',
   }),
   item({
     id: 'strawberry-cold-brew',
@@ -353,7 +353,7 @@ export const MENU_PRODUCTS: Product[] = [
     price: 229,
     description: 'Cold brew with strawberry.',
     ingredients: ['Cold brew', 'Strawberry'],
-    image: '/menu/image.png',
+    image: '/menu/strawberry-cold-brew.jpg',
   }),
 
   item({
